@@ -1,5 +1,8 @@
 package com.example.cftest;
 
+import com.example.cftest.model.Student;
+import com.example.cftest.repository.StudentRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -13,14 +16,21 @@ public class CfTestApplication {
         SpringApplication.run(CfTestApplication.class, args);
     }
 
-    @Value("${test.prop1}")
-    private String test;
+    @Autowired
+    private StudentRepository repository;
 
     @EventListener(ApplicationReadyEvent.class)
     public void onApplicationLoad() {
-        System.out.println(test);
         System.out.println(" ****************************************************************** ");
         System.out.println(" *********************** Application loaded *********************** ");
         System.out.println(" ****************************************************************** ");
+
+        repository.save(Student.builder()
+                .id(1L)
+                .name("Dave").build());
+
+        repository.save(Student.builder()
+                .id(2L)
+                .name("Mike").build());
     }
 }

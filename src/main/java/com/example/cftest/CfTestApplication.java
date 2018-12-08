@@ -3,11 +3,12 @@ package com.example.cftest;
 import com.example.cftest.model.Student;
 import com.example.cftest.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
+
+import java.time.Instant;
 
 @SpringBootApplication
 public class CfTestApplication {
@@ -27,10 +28,10 @@ public class CfTestApplication {
 
         repository.save(Student.builder()
                 .id(1L)
-                .name("Dave").build());
+                .name("Dave H" + Instant.now()).build());
 
         repository.save(Student.builder()
                 .id(2L)
-                .name("Mike").build());
+                .name("Mike Joy " + Instant.now()).build());
     }
 }
